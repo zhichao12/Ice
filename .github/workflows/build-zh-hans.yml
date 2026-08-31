@@ -31,6 +31,13 @@ jobs:
           CODE_SIGNING_ALLOWED=NO
           build
 
+      - name: Ad-hoc sign app
+        run: >-
+          codesign --force --deep --sign -
+          build/Build/Products/Release/Ice.app
+          && codesign --verify --deep --strict
+          build/Build/Products/Release/Ice.app
+
       - name: Package app
         run: >-
           ditto -c -k --sequesterRsrc --keepParent
