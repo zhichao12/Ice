@@ -260,7 +260,7 @@ private struct MenuBarSearchContentView: View {
             }
 
             let headerItem = ListItem.header(id: .header(section)) {
-                Text(section.displayString)
+                Text(section.localizedDisplayName)
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
