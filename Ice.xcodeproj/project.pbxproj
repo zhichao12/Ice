@@ -113,10 +113,10 @@
 			};
 			buildConfigurationList = 716683252A767E6A006ABF84 /* Build configuration list for PBXProject "Ice" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				"zh-Hans",
 				Base,
 			);
 			mainGroup = 716683212A767E6A006ABF84;

@@ -4,6 +4,7 @@
 //
 
 import Cocoa
+import SwiftUI
 
 /// A representation of a section in a menu bar.
 @MainActor
@@ -14,12 +15,42 @@ final class MenuBarSection {
         case hidden
         case alwaysHidden
 
-        /// A string to show in the interface.
-        var displayString: String {
+        /// A localized name to show in the interface.
+        var localizedDisplayName: LocalizedStringKey {
             switch self {
             case .visible: "Visible"
             case .hidden: "Hidden"
             case .alwaysHidden: "Always-Hidden"
+            }
+        }
+
+        /// A localized name for AppKit and search matching.
+        var displayString: String {
+            switch self {
+            case .visible: String(localized: "Visible")
+            case .hidden: String(localized: "Hidden")
+            case .alwaysHidden: String(localized: "Always-Hidden")
+            }
+        }
+
+        /// A localized section title to show in settings.
+        var localizedSectionTitle: LocalizedStringKey {
+            switch self {
+            case .visible: "Visible Section"
+            case .hidden: "Hidden Section"
+            case .alwaysHidden: "Always-Hidden Section"
+            }
+        }
+
+        /// A localized title for the section's context-menu action.
+        func contextMenuTitle(showing: Bool) -> String {
+            switch (self, showing) {
+            case (.visible, true): String(localized: "Show the Visible Section")
+            case (.visible, false): String(localized: "Hide the Visible Section")
+            case (.hidden, true): String(localized: "Show the Hidden Section")
+            case (.hidden, false): String(localized: "Hide the Hidden Section")
+            case (.alwaysHidden, true): String(localized: "Show the Always-Hidden Section")
+            case (.alwaysHidden, false): String(localized: "Hide the Always-Hidden Section")
             }
         }
 
