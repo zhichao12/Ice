@@ -1125,6 +1125,9 @@ extension MenuBarItemManager {
                 } else {
                     throw EventError(code: .couldNotComplete, item: item)
                 }
+            } catch let error as EventError where error.code == .eventOperationTimeout {
+                Logger.itemManager.warning("Move of \(item.logString) timed out; skipping retries")
+                throw error
             } catch where n < 5 {
                 Logger.itemManager.warning("Attempt \(n) to move \(item.logString) failed (error: \(error))")
                 try await wakeUpItem(item)
