@@ -239,7 +239,23 @@ final class MenuBarManager: ObservableObject {
         let windows = WindowInfo.getOnScreenWindows(excludeDesktopWindows: false)
         let displayID = screen.displayID
 
-        if let window = WindowInfo.getMenuBarWindow(from: windows, for: displayID) {
+        let menuBarWindow = WindowInfo.getMenuBarWindow(from: windows, for: displayID)
+        let wallpaperWindow = WindowInfo.getWallpaperWindow(from: windows, for: displayID)
+
+        if let menuBarWindow, let wallpaperWindow {
+            var bounds = menuBarWindow.frame
+            bounds.size.height = 1
+            bounds.origin.x = bounds.maxX - (bounds.width / 4)
+            bounds.size.width /= 4
+
+            // On macOS 26 the menu bar may be transparent, so include the wallpaper.
+            image = ScreenCapture.captureWindows(
+                [menuBarWindow.windowID, wallpaperWindow.windowID],
+                screenBounds: bounds,
+                option: .nominalResolution
+            )
+            source = .menuBarWindow
+        } else if let window = menuBarWindow {
             var bounds = window.frame
             bounds.size.height = 1
             bounds.origin.x = bounds.maxX - (bounds.width / 4)
@@ -247,7 +263,7 @@ final class MenuBarManager: ObservableObject {
 
             image = ScreenCapture.captureWindow(window.windowID, screenBounds: bounds, option: .nominalResolution)
             source = .menuBarWindow
-        } else if let window = WindowInfo.getWallpaperWindow(from: windows, for: displayID) {
+        } else if let window = wallpaperWindow {
             var bounds = window.frame
             bounds.size.height = 1
             bounds.origin.x = bounds.midX
