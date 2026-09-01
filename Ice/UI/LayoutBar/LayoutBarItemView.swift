@@ -109,8 +109,8 @@ final class LayoutBarItemView: NSView {
     /// Provides an alert to display when the item view is disabled.
     func provideAlertForDisabledItem() -> NSAlert {
         let alert = NSAlert()
-        alert.messageText = "Menu bar item is not movable."
-        alert.informativeText = "macOS prohibits \"\(item.displayName)\" from being moved."
+        alert.messageText = String(localized: "Menu bar item is not movable.")
+        alert.informativeText = String(localized: "macOS does not allow this item to be moved.")
         return alert
     }
 
