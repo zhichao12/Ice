@@ -23,7 +23,7 @@ final class SettingsManager: ObservableObject {
     private(set) weak var appState: AppState?
 
     init(appState: AppState) {
-        self.generalSettingsManager = GeneralSettingsManager(appState: appState)
+        self.generalSettingsManager = GeneralSettingsManager()
         self.advancedSettingsManager = AdvancedSettingsManager(appState: appState)
         self.hotkeySettingsManager = HotkeySettingsManager(appState: appState)
         self.appState = appState
