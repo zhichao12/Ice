@@ -24,7 +24,14 @@
 
 当前 Release 使用 ad-hoc 签名，未进行 Apple Developer ID 签名或公证。若 macOS 阻止启动，请在“系统设置 -> 隐私与安全性”中选择“仍要打开”。
 
-系统要求：macOS 14 或更高版本。
+## 系统要求
+
+仅支持以下 macOS 版本：
+
+- macOS 14 Sonoma
+- macOS 15 Sequoia
+
+macOS 26 Tahoe 及更高版本不在本 fork 的支持或测试范围内。该项目不会针对这些版本加入兼容性修复。
 
 ## 主要功能
 
