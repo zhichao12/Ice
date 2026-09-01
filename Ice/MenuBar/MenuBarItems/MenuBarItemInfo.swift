@@ -31,7 +31,7 @@ struct MenuBarItemInfo: Hashable, CustomStringConvertible {
 // MARK: MenuBarItemInfo Constants
 extension MenuBarItemInfo {
     /// An array of items whose movement is prevented by macOS.
-    static let immovableItems = [clock, siri, controlCenter, battery]
+    static let immovableItems = [clock, siri, controlCenter]
 
     /// An array of items that can be moved, but cannot be hidden.
     static let nonHideableItems = [audioVideoModule, faceTime, musicRecognition]
@@ -74,19 +74,6 @@ extension MenuBarItemInfo {
         namespace: .controlCenter,
         title: "BentoBox"
     )
-
-    /// Information for the Battery item owned by Control Center. macOS does
-    /// not consistently accept programmatic drag events for this item.
-    static let battery = MenuBarItemInfo(
-        namespace: .controlCenter,
-        title: "Battery"
-    )
-
-    /// A Boolean value that indicates whether an item is the system Battery
-    /// item. Its process ownership differs across macOS releases.
-    var isSystemBattery: Bool {
-        title == "Battery" && (namespace == .controlCenter || namespace == .systemUIServer)
-    }
 
     /// Information for the item that appears in the menu bar while the
     /// screen or system audio is being recorded.

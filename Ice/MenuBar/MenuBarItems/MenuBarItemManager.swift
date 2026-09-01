@@ -6,6 +6,10 @@
 import Cocoa
 import Combine
 
+// Some status items, including WeChat, take close to a second to publish a new
+// frame after receiving a synthetic drag event.
+private let menuBarItemFrameChangeTimeout: Duration = .seconds(1)
+
 /// Manager for menu bar items.
 @MainActor
 final class MenuBarItemManager: ObservableObject {
@@ -880,7 +884,7 @@ extension MenuBarItemManager {
             return
         }
         try await scrombleEvent(event, from: firstLocation, to: secondLocation, item: item)
-        try await waitForFrameChange(of: item, initialFrame: currentFrame, timeout: .milliseconds(50))
+        try await waitForFrameChange(of: item, initialFrame: currentFrame, timeout: menuBarItemFrameChangeTimeout)
     }
 
     /// Waits for a menu bar item's frame to change from an initial frame.
@@ -1125,7 +1129,10 @@ extension MenuBarItemManager {
                 } else {
                     throw EventError(code: .couldNotComplete, item: item)
                 }
-            } catch let error as EventError where error.code == .eventOperationTimeout {
+            } catch let error as EventError where [
+                .eventOperationTimeout,
+                .frameCheckTimeout,
+            ].contains(error.code) {
                 Logger.itemManager.warning("Move of \(item.logString) timed out; skipping retries")
                 throw error
             } catch where n < 5 {
