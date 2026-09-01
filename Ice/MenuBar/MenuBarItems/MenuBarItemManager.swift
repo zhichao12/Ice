@@ -6,10 +6,6 @@
 import Cocoa
 import Combine
 
-// Some status items, including Battery, need longer than a single run-loop turn
-// before they acknowledge a synthetic menu-bar event or update their frame.
-private let menuBarItemEventTimeout: Duration = .milliseconds(250)
-
 /// Manager for menu bar items.
 @MainActor
 final class MenuBarItemManager: ObservableObject {
@@ -744,7 +740,7 @@ extension MenuBarItemManager {
                 return nil
             }
 
-            eventTap.enable(timeout: menuBarItemEventTimeout) {
+            eventTap.enable(timeout: .milliseconds(50)) {
                 Logger.itemManager.error("Event tap \"\(eventTap.label)\" timed out (item: \(item.logString))")
                 eventTap.disable()
                 continuation.resume(throwing: EventError(code: .eventOperationTimeout, item: item))
@@ -850,7 +846,7 @@ extension MenuBarItemManager {
 
             // Enable both taps, with a timeout on the second tap.
             eventTap1.enable()
-            eventTap2.enable(timeout: menuBarItemEventTimeout) {
+            eventTap2.enable(timeout: .milliseconds(50)) {
                 Logger.itemManager.error("Event tap \"\(eventTap2.label)\" timed out (item: \(item.logString))")
                 eventTap1.disable()
                 eventTap2.disable()
@@ -884,7 +880,7 @@ extension MenuBarItemManager {
             return
         }
         try await scrombleEvent(event, from: firstLocation, to: secondLocation, item: item)
-        try await waitForFrameChange(of: item, initialFrame: currentFrame, timeout: menuBarItemEventTimeout)
+        try await waitForFrameChange(of: item, initialFrame: currentFrame, timeout: .milliseconds(50))
     }
 
     /// Waits for a menu bar item's frame to change from an initial frame.

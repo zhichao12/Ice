@@ -118,6 +118,8 @@
 "Click item" = "点按项目";
 "Show item" = "显示项目";
 "Unable to display menu bar items" = "无法显示菜单栏项目";
+"Menu bar item is not movable." = "此菜单栏项目不可移动。";
+"macOS does not allow this item to be moved." = "macOS 不允许移动此项目。";
 "The Ice Bar requires screen recording permissions." = "Ice 工具栏需要屏幕录制权限。";
 "Open Ice Settings" = "打开 Ice 设置";
 "Ice cannot display menu bar items for automatically hidden menu bars" = "Ice 无法为自动隐藏的菜单栏显示项目";
