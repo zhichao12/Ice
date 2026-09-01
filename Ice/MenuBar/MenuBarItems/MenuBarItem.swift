@@ -38,7 +38,7 @@ struct MenuBarItem {
     /// A Boolean value that indicates whether the item can be moved.
     var isMovable: Bool {
         let immovableItems = Set(MenuBarItemInfo.immovableItems)
-        return !immovableItems.contains(info)
+        return !immovableItems.contains(info) && !info.isSystemBattery
     }
 
     /// A Boolean value that indicates whether the item can be hidden.

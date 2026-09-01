@@ -82,6 +82,12 @@ extension MenuBarItemInfo {
         title: "Battery"
     )
 
+    /// A Boolean value that indicates whether an item is the system Battery
+    /// item. Its process ownership differs across macOS releases.
+    var isSystemBattery: Bool {
+        title == "Battery" && (namespace == .controlCenter || namespace == .systemUIServer)
+    }
+
     /// Information for the item that appears in the menu bar while the
     /// screen or system audio is being recorded.
     static let audioVideoModule = MenuBarItemInfo(
