@@ -35,6 +35,8 @@
 "Automatically rehide" = "自动重新隐藏";
 "Strategy" = "重新隐藏策略";
 "Menu bar item spacing" = "菜单栏项目间距";
+"Refresh" = "刷新";
+"Restart menu bar apps and reapply the current spacing" = "重启菜单栏应用并重新应用当前间距";
 "You can still access Ice's settings by right-clicking an empty area in the menu bar" = "仍可通过右键点按菜单栏空白区域打开 Ice 设置";
 "The Ice Bar's location changes based on context" = "Ice 工具栏的位置会根据当前情境变化";
 "The Ice Bar is centered below the mouse pointer" = "Ice 工具栏居中显示在鼠标指针下方";

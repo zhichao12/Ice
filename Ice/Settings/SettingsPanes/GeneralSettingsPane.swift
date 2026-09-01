@@ -242,6 +242,12 @@ struct GeneralSettingsPane: View {
                 .help("Apply the current spacing")
                 .disabled(isApplyingOffset || !hasSpacingSliderValueChanged)
 
+                Button("Refresh") {
+                    applyOffset()
+                }
+                .help("Restart menu bar apps and reapply the current spacing")
+                .disabled(isApplyingOffset)
+
                 if isApplyingOffset {
                     ProgressView()
                         .progressViewStyle(.circular)
